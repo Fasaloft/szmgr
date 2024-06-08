@@ -49,6 +49,74 @@ Pro desktopové aplikace je možné použít i technologie jako GTK (existují b
 
 Začneme uživatelským výzkumem, abychom pochopili skutečné požadavky na UI. Následuje návrh pomocí wireframů a prototypů, které můžeme použít pro zpětnou vazbu a jako předlohu pro vývojovou práci. Na konec je důležité provést uživatelské testování s různými typy uživatelů, abychom předešli problémům při nasazení aplikace.
 
+### Design process
+
+Is user centric way of problem-solving
+
+#### Emphasize 
+- kto su uzivatelia
+- aky je kontext?
+- co uzivatelia ockavaju
+- ake su ciele
+- co sa snazime dosiahnut svojim produktom?
+
+Máme teda nejaku cieľovú skupinu, ktorá je definovaná konkrétnymi kritérmiami
+- Demograficky - vek, pohlavie
+- Psychologicky - ako premyslaju
+- Behavioralne - ako sa spravaju
+- Geograficky - kde žijú
+
+Ako prvy krok designu je teda vžiť sa do kože užívateľa. Môžme si predstaviť čo vidí, čo hovorí, počuje, myslí si.
+
+### Define
+
+Musíme si následne zadefinovať čo sa snažíme vyriešiť. Taktiež musíme prekúumať aké su potreby a ciele užívateľov a následne ich zadefinovať ako požiadavky vo funkcionalite, atributoch, špecifikacii.
+
+### Ideate 
+
+Ideacia je designovy proces, pri ktorom sa sustredime na tvorbu napadov. Snažíme sa ich vytvoriť koľko sa dá, sústredíme sa na kvantitu a cieľ je preskúmať čo najviac možností a pohladov
+
+### Metody uzivatelskeho vyskumu
+
+- **Kvalitativne**: otazky ako "Prečo?", "Ako?", tažke, zdlhave, idu do hlbky
+	- Rozhovory
+	- Testovania použitelnosti
+	- Etngrafické štúdie
+	- Card sorting
+- **Kvantitativne**": pytames sa "Kolko?", "Ako často?", zaujimaju nas data z analytiky, chceme mat hypotezu, co by sme chceli vyvratit/potvrdit
+	- dotazniky
+	- benchmarking A/B testy
+
+Musime sa tiez vysporiadat so skresleniami ako
+- konfirmacne skreslenie
+- halo effect
+- stereotypizacia
+- availibily
+
+### Design vyskumu 
+- ciel - konkretny, dosiahnutelny, je jasne daný účel a preco to robime
+- vyskumna otazka - co nevieme a chceme vediet, skumatelna, otvorena
+- hypotezy - co si myslime a co vieme, jasne tvrdenia
+
+### Hlbkovy rozhovor
+- Ide o pochopenie zakaznika - kto je nas zakaznik, ake ma potreby
+- Mentalne modely - chceme zistit, ako uzivatelia uvazuju, co ocakvaju
+- Cesta zakaznika - chceme pochopit procesy, ako to pouzivaju
+- Príležitosti - čo im chýba, čo ich hnevá, čo je opre nic dôležité
+#### Struktura 
+- Predstavenie, smalltalk
+- Zahrievacie otazky
+- Hlavne otazky
+- Dopytovanie
+- Doplnovacie otazky
+- Podakovanie
+- Odmena (cukrik)
+
+Pouzivame techniky ako parafrazovanie, zrkadlenie, ticho, nedoncene otazky, bumerang
+
+### Persóna
+
+Vieme si vytvoriť fiktívnych reprezentantov segmentu danej cielovej skupiny. Tento fiktívny reprezentant sliuzi k empatii a zameraniu
 ### Uživatelský výzkum, analýza
 - Je důležité určit, kdo jsou naši uživatelé, jak dosud pracují se stávajícími systémy, co jim vyhovuje a co ne...
 - Je důležité určit, co jsou požadavky na systém, jak se používá (můžeme se snažit o minimalizaci kliknutí pro dosažení operace...)
