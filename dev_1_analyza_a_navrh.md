@@ -4,113 +4,335 @@
 
 ## Objektové metody návrhu informačních systémů.
 
-Přístupy a postupy k návrhu IS založených na objektově orientovaném paradigmatu, kde jsou objekty spojením dat a metod nad těmito daty.
+Důležitý princip okolo kterého se vše točí je dekompozice systému. Nejsme schopní vše brát jako celek a musíme si najít nějakou dekompozici na různé komponenty a vztahy mezi nimi. Díky tomu jsme schopni vytvářet modely, ve kterých se dá mnohem lépe orientovat a vyznat.
+
+**Dekompozice na úrovni objektově orientovaného modelování**
+Definice objektového návrhu je tedy to, že část systému jsou nějaká *zapouzdřená data a spolu s nimi jsou propojené operace* nad těmito daty. Interní propojení se zde moc neřeší a je implicitní. *Propojení jednotlivých částí je volné* a závisí na definici rozhraní jednotlivých komponent.
+
+Hlavním stavebním kamene je diagram tříd, nicméně využívají se zde skoro všechny diagramy z UML. Hlavní rozdělení těchto diagramů je:
+- *Behaviour Diagram*
+	- Activity
+	- Interaction
+		- Sequence 
+		- Communication
+	- State Machine
+	- Use case
+- *Structure Diagram*
+	- Class
+	- Deployment
+	- Component
+	- Object
+
+**Objektově orientované paradigma**
+- dekompozice na malé udržitelné části
+- hlavní je dodržovat zapouzdření
+- snažíme se cílit na znovupoužitelnost na úrovni komponent
+- používáme dědičnost a abstrakci
+- rozdíl object vs. třída - instance za běhu a statický předpis v době návrhu
+- objekty vytváří jiné objekty a posílají si zprávy 
+
+**Dědičnost** - může být fajn jako návrh, ale v dnešní době moc nechceme používat, spíše se přikláníme k použití *dependency injection* jako asociace, což nám poskytuje více volnosti
+
+**Kompozice** - faktura má položky, pokud zahodím fakturu, nemám žádné položky, tedy kompozice mi říká, že je zde silná závislost a položka nemůže existovat bez celku. Značíme plnou šipkou.
+
+**Agregace** - počítač může využívat tiskárnu, ale pokud počítač zahodím, tiskárna pořád bude existovat. Tedy využívám jiný objekt, ale není na mě kompletně závislý. Značíme prázdnou šipkou.
+
+**SOLID** - S objektovými metodami velmi úzce souvisí SOLID principy. Chceme je tedy používat i v rámci návrhu systému.
+
+**Konflikty s ERD** - pokud modelujeme čistě podle objektového přístupu, některé věci nejde úplně dobře přenést do entitně relačního schématu.  Nejde zde například potřeba trochu jinak modelovat m-n vazby, případně obousměrné vazby. Tak= dědičnost databáze nepodporují a tedy špatně se s ní pracuje.
 
 Při modelování systému je dobré definovat si jednotný jazyk, který reflektuje skutečnou terminologii pro danou doménu problému. Podle toho volíme jména funkcí/tříd, aby bylo pokaždé všem (od doménových expertů po vývojáře) jasné, o čem se mluví. Podstatná jména používaná v jednotném jazyce obvykle v kódu reflektují třídy/rozhraní, slovesa zase metody/funkce.
 
-Objektové paradigma si dobře rozumí s principy abstrakce, což lze aplikovat nejen na úroveň objektů, ale i komponentů - základních stavebních jednotek, ze kterých se skládá architektura systému.
+Objektové paradigma si dobře rozumí s principy abstrakce, což lze aplikovat nejen na úroveň objektů, ale i *komponentů* - základních stavebních jednotek, ze kterých se skládá architektura systému.
 
-Mezi metody se řadí:
-- modelování domény pomocí [UML](./dev_1_analyza_a_navrh.md#modely-softwarových-systémů-jazyk-uml), v různých částích vývoje se zabýváme různými úrovněmi detailů
+Mezi **metody** se řadí:
+- modelování domény pomocí [UML](./dev_1_analyza_a_navrh.md#modely-softwarových-systémů-jazyk-uml)
+- v různých částech vývoje se zabýváme různými úrovněmi detailů UML diagramů
 - dekompozice systému do menších, koherentních částí
 - aplikace návrhových a architektonických vzorů, které popisují řešení na dobře známé a často se opakující problémy v (nejen) objektovém světě.
 
+
+---
+
 ## Specifikace a řízení požadavků.
 
-Požadavky na systém se dělí (obvykle je mezi kategoriemi tenká hranice a závisí i na formulaci) na:
+Požadavky na systém se dělí (obvykle je mezi kategoriemi tenká hranice podle formulace) na:
 - **Funkční (functional) požadavky** - jaké funkce zákazník od systému očekává, jedná se o business logiku, uživatelské požadavky, řeší se programově, v implementaci
 - **Nefunkční (non-functional/quality) požadavky** - jaké technické nároky jsou na systém, použité technologie, OS, garance dostupnosti (availability), response time, internacionalizace a lokalizace, řeší se návrhem, architekturou i kódem
 
-Součástí řízení požadavku je
-- porozumnění doméně problému 
+**Řízení požadavků**
+- porozumění doméně problému
 - sběr požadavků od stakeholderů - klíčem je ptát se PROČ, ne CO a JAK 
-- analýza a jednání (hej, toto není možné/hej, nestačilo by vám to udělat takto?...)
-- specifikace požadavků - úprava do jednoznačné/formální podoby (use case). Je jasné, v jakém momentě můžeme považovat za splněný.
+- použití analytických diagramů (Martin Fowler)
+- specifikace požadavků 
+	- úprava do jednoznačné/formální podoby (use case)
+	- koncepční diagramy tříd
+	- je jasné, v jakém momentě můžeme považovat za splněný
 - validace požadavků - ověření, že formalizované požadavky odpovídají skutečným potřebám
-- prioritizace požadavků - umožňuje soustředit se na kritické části (dle potřeb zákazníka) a blbosti případně vynechat, pokud nebude čas/rozpočet.
+- prioritizace požadavků - umožňuje soustředit se na kritické části (dle potřeb zákazníka)
 
-Dobrý/dobře specifikovaný požadavek
-- reflektuje skutečné potřeby zákazníka a je v něm obsaženo PROČ (abychom mohli vybrat nejvhodnější řešení, ale může obsahovat návrhy)
-- má jasné kritérium splnění, je měřitelný a testovatelný
-- má prioritu
-- je úplný
+**Dobře specifikovaný požadavek**
+- reflektuje skutečné potřeby zákazníka
+- je v něm obsaženo PROČ (abychom mohli vybrat nejvhodnější řešení)
+- má jasné *kritérium splnění*, je *měřitelný a testovatelný*
+- má prioritu a je úplný
 
-Obecně platí, že čím později se požadavek změní, tím nákladnější bude jeho implementace.
+Obecně platí, že *čím později se požadavek změní, tím nákladnější bude jeho implementace*.
 
-Požadavky se modelují pomocí **use case diagramu**, uchovávají se v **use case dokumentu** (forma: id, jméno, actor(s), popis, trigger, pre/post conditions, příklad typického flow, priorita, výjimky, častost používání...). Požadavky jsou také formalizovány v jednoduché formě pomocí **user stories** - krátké, výstižné popisy (As `role` I want to `akce` So I can `zdůvodnění`), srozumitelní zákazníkovi (+ obsahují akceptační kritéria, prioritu, story pointy...).
+Požadavky se modelují pomocí *use case diagramu,* uchovávají se v *use case dokumentu* s nějakou identifikací, názvem, aktory, popisem a třeba i pre a post conditions a dalšími parametry.
+
+Požadavky jsou také formalizovány v jednoduché formě pomocí **user stories** - krátké, výstižné popisy (As *WHO* I want to *WHAT* So I can *WHY*), srozumitelní zákazníkovi (+ obsahují akceptační kritéria, prioritu, story pointy).
 
 Pro **určení priority požadavku** lze použít například:
 - klasické ohodnocení 1-10
 - binární strom - požadavky jsou uchovávány v uzlech. Vkládaný požadavek srovnáváme s uzly od kořene. Pokud je vkládaný požadavek prioritnější, jdeme doprava. Jinak jdeme doleva. Vložený požadavek bude listem stromu.
-- MoSCoW - požadavky dělíme na Must (kritické), Should (důležité), Could (bylo by fajn mít) a Won't (aktuálně to nemáme v plánu)
+- MoSCoW - požadavky dělíme na Must, Should, Could a Won't
 
-Non-functional requirements platí vždy, je třeba je brát v potaz i s nově příchozími functional požadavky => máme pro ně vyhrazené místo (e.g. wiki), kde jsou důkladně popsány. Můžeme na konkrétní NFR poukázat v user stories (e.g. u FR `jako uživatel chci mít přístup k aktuálním datům senzoru` linkneme NFR `systém poskytne odezvu do vteřiny` a `data ze senzorů se do systému dostanou nejpozději minutu po naměření`).
+**Nefunkční požadavky** 
+Platí vždy, že je třeba je brát v potaz i s nově příchozími functional požadavky, tedy máme pro ně vyhrazené místo, kde jsou důkladně popsány. Můžeme na konkrétní NFR poukázat v user stories, tedy v jedné story může být:
+- FR jako uživatel chci mít přístup k aktuálním datům senzoru
+- NFR systém poskytne odezvu do vteřiny
+- NFR data ze senzorů se do systému dostanou nejpozději minutu po naměření
 
 
-## Softwarové architektury, komponentové systémy.
+---
 
-Sw architektura určuje, jakým způsobem je systém strukturován, jakým způsobem je dělen na komponenty/moduly a jak mezi sebou jednotlivé komponenty/moduly interagují a jak jsou jednotlivé části systému nasazeny na hw.
+## Softwarové architektury
 
-SW architektury (vyšší úroveň abstrakce) a architektonické vzory (nižší úroveň abstrakce) jsou obecná řešení architektur systému. Uvádím jen seznam, podrobně jsou popsány v [části otázky 1](./1_programovani_a_softwarovy_vyvoj.md#základní-koncepty-softwarových-architektur-z-pohledu-implementace-vícevrstvá-architektura-moderních-informačních-systémů-architektura-model-view-controller)
-- **MVC/MVP/MVVM pattern**
-- **Klient-Server** 
-- **Peer-to-Peer** 
-- **Layered architecture** - vrstvená architektura používá architektonický vzor Repository
-- **Microkernel**
-- **Pipes and filters**
-- **Blackboard** - tabule je sdílená, jsou na ní data. Výpočetní agenti k tabuli přistupují a zpracovávají  data dle svých interních strategií. Klient následně vybere agenta, který přišel s nejlepším řešením, na základě čehož se aktualizují data na tabuli. Nedeterministický výpočet. e.g. použití různých algoritmů u kterých nevíme, jaký je nejlepší.
-- **SOA**
-- **Microservices**
+SW architektura určuje, jakým způsobem je systém strukturován, jakým způsobem je dělen na komponenty/moduly a jak mezi sebou jednotlivé komponenty/moduly interagují a jak jsou jednotlivé části systému nasazeny na HW. Tady se dá popsat jako struktura, která se velmi těžko pokud vůbec dá po implementaci změnit.
 
-Komponenty jsou spustitelné softwarové jednotky, která mají definované komunikační rozhraní, do vnitřního fungování nevidíme/nezajímá nás. Komponent by měl poskytovat logicky související funkcionalitu, funguje jako vrstva abstrakce. Komponenty mohou být vyvíjeny nezávisle na jiných komponentech, jsou nahraditelné (stačí splnit rozhraní a jeho kontrakt), znovupoužitelné. Komponenty mohou mít vnitřní stav, ten však může dělat problém u škálování (paralelizací komponentů), mohou být asynchronní, mohou se interně skládat z dalších komponentů...
+SW architektury (vyšší úroveň abstrakce) a architektonické vzory (nižší úroveň abstrakce) jsou obecná řešení architektur systému.
+
+**MVC/MVP/MVVM pattern** - rozdělení na části, které zpracovávají dotazy, které pracují s daty a které vytváří UI pro uživatele
+
+**Klient-Server** - klient je prezentační vrstva, server odpovídá na požadavky klienta
+
+**Peer-to-Peer** - každý uzel je zároveň klient a zároveň server
+
+**Layered architecture** - vrstvená architektura používá architektonický vzor Repository, snažíme se o abstrakci a rozdělení zodpovědnosti
+
+**SOA** - zodpovědnou za určitou část řešené určitou službou, sdílí se databáze
+
+**Microservices** - speciální případ SOA, hodně loosely coupled, nesdílí se DB
+
+
+---
+
+## Komponentové systémy
+
+##### Komponentové systémy
+Skládání jednotlivých komponent dohromady a provazování jejich komunikace. Jde o nějaké konkrétní realizování softwarové architektury. Díky použití komponent tak při vývoji softwarové architektury nemusím znát jejich interní reprezentaci, ale zajímá mě jen jejich úloha a rozhraní.
+
+##### Komponenty
+Jsou to spustitelné softwarové jednotky, která mají definované komunikační rozhraní, do vnitřního fungování nevidíme/nezajímá nás. 
+
+Komponent by měl poskytovat logicky související funkcionalitu, funguje jako vrstva abstrakce.  Mohou být vyvíjeny nezávisle na jiných komponentech, jsou nahraditelné (stačí splnit rozhraní a jeho kontrakt), znovupoužitelné. Komponenty mohou mít vnitřní stav, ten však může dělat problém u škálování (parcelizací komponent), mohou být asynchronní, mohou se interně skládat z dalších komponent.
 
 Pokud systém vystavuje rozhraní používaná i někým jiným (klient), je fajn nějakým způsobem verzovat rozhraní. Díky tomu se předejde problémům při přidávání změn, nějakou dobu totiž můžeme podporovat vícero rozhraní, než se klient aktualizuje na novou verzi.
 
+Komponenta se od třídy liší od třídy tím, že v rámci komponenty máme více tříd, případně objektů a není zde viditelný zdrojový kód. Většinou má složitější životní cyklus. Třída na rozdíl od toho může mít i více rozhraní a je celkově otevřenější.
+
+Komponenty mohou být stavové a bezstavové, kdy ty bezstavové jsou lepší kvůli lepší škálovatelnosti. Také mohou být dynamické, tedy se automaticky instancovat za běhu, případně statické, které mají pevný počet.
+
+Komponenty můžeme vnímat jak jako runtime, tak jako design time. 
+
+Komponenty mohou mít prvky:
+- **Interface** - specifikace služeb, které vyžaduje nebo poskytuje
+- **Port** - kam se dá připojit, můžeme mít stejné rozhraní na různých portech
+- **Interní struktura** - většinou blackbox, nezajímá nás
+
+
+
+---
+
+## Rozhraní komponent, kontrakty na úrovni rozhraní
+
+**Rozhraní**
+Aby mohl komponent komunikovat se svým okolím (být volán a případně vracet data), potřebuje nějaké veřejné rozhraní, kterému se říká **signatura**. Skládá se z poskytovaných operací (funkcí/metod) a jejich vstupních a výstupních parametrů.
+
+Rozhraní musíme velmi dobře dokumentovat a musíme mít specifický kontrakt.
+
+**Kontrakt**
+U rozhraní nás zajímají i další omezení, které mohou upravovat (správné) používání rozhraní (*e.g. uživatel se může registrovat jen jednou*). Signatuře a omezení se souhrnně říká **kontrakt**. Kontrakt popisuje poskytnutou funkcionalitu za předpokladu, že dodržíme předem stanovené podmínky. 
+
+Součástí kontraktu (v kontextu struktur/objektů) můžou být:
+- **preconditions** 
+	- co musí platit před vyvoláním dané metody, aby metoda proběhla správně 
+	- e.g. máme dost peněz na účtu
+- **postconditions** 
+	- co musí platit po skončení dané metody, i.e., co metoda poskytuje 
+	- e.g. proběhne platba, z účtu se nám odečte příslušná platba
+- **invariants** 
+	- co vždy musí platit, váže se obvykle k objektům, nejen metodám 
+	- e.g. na debetním účtu není možné jít do mínusu
+
+Pro definici kontraktů můžeme používat
+- **běžný jazyk** - většinou moc neformální a nejasné
+- **matematické notace**
+- **OCL** (object contraint language) 
+
+---
+
+## OCL (Object Constraint Language)
+Je deklarativní jazyk, silně typovaný jazyk, který umožňuje popis kontraktů a jejich constraintů (omezení domén hodnot), včetně jejich zavedení do UML, a může být použit i pro jejich vynucování (e.g. generování kódu na základě kontraktu popsaného v komentáři/anotacích).
+
+Při definici kontraktů objektů s dědičností nesmíme porušit *Liskov substitution principle*, dědic může invarianty a postconditions pouze utahovat, ne je rozvolňovat (co platilo pro rodiče, musí platit i pro potomka). Naopak je to u preconditions, kde může dědic podporovat více vstupů než předek.
+
+V rámci UML se každý klasifikátor (třída nebo atribut) stává typem v OCL. Má taky základní typy kolekcí a stavíc *contraints*, které pak propojuje v rámci *kontextu* k elementům UML.
+
+##### Invariants
+- je to boolean výraz, tedy musí být splněný v rámci celého životního cyklu objektu
+- váže se na nějaký kontext, tedy spíše ke třídě
+- za klíčovým slovem `inv` můžeme přidat název
+
+Příklady
+`context Flight inv flightDuration: duration < 4`
+`context Car inv: self.speed < 240`
+
+##### Preconditions
+- musí být splněné před spuštěním operace
+- specifikuji kromě třídy i její metodu
+- mohu se odkazovat na vstupní hodnoty, případně atributy
+
+Příklady
+```
+context Flight::shiftDepart (t:Integer) 
+	pre: t>0
+```
+
+
+##### Postconditions
+- musí být pravdivé po ukončení operace
+- přes @pre se mohu odkazovat na stav před a po ukončení operace
+
+Příklady:
+```
+context Flight::shiftDepart (t:Integer): Time 
+	post: result = departureTime + t
+
+context Flight::shiftDepart (t:Integer): Time 
+	post: result = departureTime@pre + t + duration
+
+context Stack::pop()
+	pre neniPrazdny: self.len() > 0
+	post vraciVrsekZasobniku: result = self@pre.top()
+```
+
+##### Dědičnost
+Pro jednotlivé typy v OCL musíme umět definovat dědičnost, která ale nesmí porušit Liscov substitution princip.
+
+**Invariant**:
+- mohu jen *zesilovat*, ale ne zeslabovat, tedy utahuji podmínku
+- `context Flight inv: duration < 4`
+- `context JetFlight inv: duration < 2`
+
+**Precondition**
+- podtřídy se mohou precondition jen *oslabovat*
+- `context SuperClass::foo(i: Integer) pre: i > 1000`
+- `context SubClass::foo(i: Integer) pre: i > 0`
+
+**Postcondition**
+- postcondition může být jen *posílený*
+- `context SuperClass::foo() : Integer post: result > 0`
+- `context SubClass::foo() : Integer post: result > 1000`
+
+##### Kolekce
+Celkem podporuje OCL tyto tři kolekce:
+- **Set** - neuspořádaná množina bez duplicit
+- **Bag** - neuspořádaná množina s duplicitami
+- **Sequence** - uspořádaní množina s duplicitami
+
+S kolekcemi se dá pracovat funkcionálně:
+- `contextAirport inv: self.arrivingFlights -> collect(airline) -> notEmpty`
+- `contextAirport inv: self.departingFlights -> forAll(departTime.hour > 6)`
+- `contextAirport inv: self.departingFlights -> exists(departTime.hour < 6)`
+
+V OCL lze provádět i množinové operace (union, intersection...), používat booleovské operátory (or, and, implies...) a spoustu dalšího (proměnné, cykly...)
+
+Také se mohu odkazovat na stavy objektu:
+- `context Bottle inv.`
+
+
+---
+
 ## Návrhové a architektonické vzory.
 
-Návrhový vzor je obecné řešení k často se opakujícímu problému řešenému při návrhu sw, není potřeba kompletně vymýšlet vlastní řešení. Slouží nejen jako obecný návod pro implementaci, ale umožňují snadnější komunikaci v rámci týmu (e.g. tady použijeme Strategy pattern). Vzory je třeba používat s rozvahou, občas můžou být zbytečně obecné.
+##### Obecně o návrhových vzorech
+Návrhový vzor je obecné řešení k často se opakujícímu problému řešenému při návrhu softwaru, není potřeba kompletně vymýšlet vlastní řešení. Slouží nejen jako obecný návod pro implementaci, ale umožňují snadnější komunikaci v rámci týmu (e.g. tady použijeme Strategy pattern). Vzory je třeba používat s rozvahou, občas můžou být zbytečně obecné.
 
-*Architektonické vzory jsou popsány v [předchozí podotázce](./dev_1_analyza_a_navrh.md#softwarové-architektury-komponentové-systémy)*.
+##### Problémy
+Není úplně pravda, že čím více vzorů použijeme, tím lepší, taky je potřeba přemýšlet, když vzor používáme, zda opravdu sedne na takové místo, nebo to tam je násilím. Občas vzory mohou vypadat hodně podobně, ale je potřeba jim dobře rozumět, abychom je rozlišili.
 
-[Pro pochopení a ukázky kódu](https://refactoring.guru/design-patterns)
+##### Rozdělení
+Vzory můžeme klasifikovat podle GoF knihy na:
+- **Creational patterns**
+	- Factory method, Abstract factory, Builder, Prototype, Singleton
+- **Structural patterns**
+	- Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy
+- **Behavioural patterns**
+	- Iterator, Memento, Observer, State, Strategy, Visitor
+
 
 ### Creational patterns
 
-Řeší tvobu a inicializaci objektů, poskytují jednoduché rozhraní skrývající složitou inicializaci.
-
 #### Singleton
+Zajišťuje, že daný objekt existuje v systému jen jednou (globální stav). V OO jazycích se řeší pomocí třídy s private constructorem a se statickou metodou `instance()` poskytující přístup k objektu drženému ve statickém atributu. 
 
-Zajišťuje, že daný objekt existuje v systému jen jednou (globální stav). V OO jazycích se řeší pomocí třídy s private constructorem a se statickou metodou `instance()` poskytující přístup k objektu drženému ve statickém atributu. *Metoda `instance() se obvykle stará i o inicializaci statického atributu* 
+Metoda `instance()` se obvykle stará i o inicializaci statického atributu
 
-Singleton je mnohdy považován za antivzor, protože vytváří globální stav (namísto předávání stavu parametry) - blbě se to testuje, může být nutné zamykání globálního stavu pro thread safety, narušuje se single responsibility principle (singleton třída ovládá svou tvorbu).
+##### Aplikovatelnost
+- chci mít danou instanci pouze jednou a chci mít kontrolu nad přístupem
+- typicky třeba když dělám pool databáze tak tam chci použít tento pattern
 
-E.g. DB pool
+##### Důsledky
+- Singleton je mnohdy považován za antivzor, protože vytváří globální stav
+- blbě se to testuje, může být nutné zamykání globálního stavu pro thread safety
+- narušuje se single responsibility principle (singleton třída ovládá svou tvorbu)
 
-![](img/20230603121311.png)
+![600](img/20230603121311.png)
+
 
 #### Factory method
+Stará se o tvorbu konkrétních instancí objektů dle instance továrny.
 
-Stará se o tvorbu konkrétních instancí objektů dle instance továrny (i.e., máme interfaces VehicleFactory a Vehicle. CarFactory bude dělat Car, zatímco stejné volání metody u PlaneFactory vytvoří Plane). Používá se pokud potřebujeme flexibilní a rozšiřitelný způsob vytváření objektů, nebo chceme oddělit logiku tvorby objektu od zbytku. Nevýhodou je nutnost tvorby nové Factory třídy a rozhraní.
+Příklad: máme rozhraní `VehicleFactory` a `Vehicle`. `CarFactory` bude dělat `Car`, zatímco stejné volání metody u `PlaneFactory` vytvoří `Plane`. 
 
-![](img/20230604152821.png)
+##### Aplikovatelnost
+-  pokud potřebujeme flexibilní a rozšiřitelný způsob vytváření objektů
+- pokud chceme oddělit logiku tvorby objektu od zbytku
+- nevýhodou je nutnost tvorby nové Factory třídy a rozhraní.
+
+![600](img/20230604152821.png)
+
 
 #### Abstract factory
-
 Podobná factory method, ale je zodpovědná za více produktů. Instance této factory zajišťuje tvorbu vzájemně kompatibilních produktů.
 
-![](img/20230605121553.png)
+Příklad: Můžeme vyrábět celé auto, kdy potřebujeme vyrábět kompatibilní díly pro určitou značku. `AbstractFactory` tedy bude `SkodaFactory` a budeme mít produkty jako je `wheel`, `engine`, `roof` apod.
+
+##### Aplikovatelnost
+- chci mít od určitého druhu kompatibilní třídy
+- konfigurovatelnost - používá se například u UI pro různé systémy
+- většinou přidání nového produktu je docela obtížné, protože musí být doimplementováno
+
+![600](img/20230605121553.png)
+
 
 #### Prototype
-
 Doslova trait `Clone`, vytvoří identickou kopii nějakého již existujícího objektu. Hodí se, pokud inicializace objektu je náročná, nebo neznáme konkrétní instanci (pracujeme s abstrakcí přes interface).
 
-![](img/20230604183448.png)
+##### Aplikovatelnost
+- pokud je časově náročné vytvářet jednotlivé instance
+- někdy je klonování jednodušší a máme jistotu, že objekty budou stejné
+
+![600](img/20230604183448.png)
+
 
 #### Builder pattern
 
 Ke konfiguraci objektu při inicializaci používáme (deklarativním způsobem) metody příslušného `Builder` objektu, každá se stará o jeden aspekt. 
 
-E.g. Inicializace http požadavku
+Příklad: Inicializace http požadavku, případně string builder.
 
 ```rust
 let request = HttpRequest::get("www.mysite.com/content")
@@ -119,169 +341,177 @@ let request = HttpRequest::get("www.mysite.com/content")
     .build();
 ```
 
+##### Aplikovatelnost
+- pokud máme nějaké komplexní objekty, které můžeme skládat postupně
+- umožňuje to přehlednější stavbu než teleskopické kontruktory
+
 ![](img/20230604183525.png)
 
 
 ### Structural patterns
 
-Řeší kompozici objektů do hierarchií, oddělení rozhraní a implementace.
-
 #### Composite
+Umožňuje tvorbu stromových struktur a poskytuje jednotné rozhraní k operaci na podstromu definovaném svým kořenem.`Component` je buď list `Leaf`, nebo uzel `Composite` obsahující potenciálně další `Component`.
 
-Umožňuje tvorbu stromových struktur a poskytuje jednotné rozhraní k operaci na podstromu definovaném svým kořenem.`Component` je buď list `Leaf`, nebo uzel `Composite` obsahující potenciálně další `Component`y.
+##### Aplikovatelnost
+- pokud chceme mít hierarchii s jednotnými akcemi
+- stavební prvky grafických rozhraní
 
-E.g. stavební prvky grafických rozhraní
+Je snadné přidávat nové typy a nemusíme řešit, co máme za uzly, prostě jen aplikujeme operaci.
 
-![](img/20230603143753.png)
+![600](img/20230603143753.png)
+
 
 #### Adapter
+Taky by se dal nazvat wrapper - zapouzdříme/poskytneme rozhraní nekompatibilní jednotce tak, aby se dala použít v našem systému.
 
-A.k.a. Wrapper - zapouzdříme/poskytneme rozhraní nekompatibilní jednotce tak, aby se dala použít v našem systému.
-
-E.g. integrace knihovny, případně můžeme adaptér použít k převodu mezi formáty (XML - JSON)
+##### Aplikovatelnost
+- pokud chci integrovat knihovny
+- můžeme adaptér použít k převodu mezi formáty (XML - JSON)
+- dá se díky němu připojovat nové komponenty na staré systémy
 
 Adaptér lze implementovat ve všech populárních jazycích jako wrapper, je možná i implementace class adaptéru v jazycích podporujících mnohonásobnou dědičnost.
 
-![](img/20230603161229.png)
+Většinou ale nejde adaptovat i podtřídy a umožňuje nám to měnit chování adaptovaného, což je bráno obecně jako nevýhody.
+
+![600](img/20230603161229.png)
+
 
 #### Bridge
-
 Používá se k rozbití tightly coupled jednotek (nebo skupiny jednotek) pomocí abstrakcí (ty mohou mít vícero implementací, ale často nám bridge pomůže jen díky vytvoření abstrakce).
 
-E.g. Fullstack aplikaci využívající templating rozbijeme na frontend a backend api.
+##### Aplikovatelnost
+- změny v konkrétních implementacích neovlivňují klienta
+- chceme používat abstrakce a implementace
+- ve fullstack aplikaci využívající templating rozbijeme na frontend a backend API.
 
-![](img/20230604142514.png)
+![600](img/20230604142514.png)
+
 
 #### Decorator
-
 Umožňuje rozšířit třídu, přidat k ní různé metody/atributy na základě použitého dekorátoru, dynamicky je přidávat/odebírat. Obdobně jako Adapter může obalit původní komponent, ale nemění rozhraní komponentu.
 
-E.g. BufReader pro bufferované čtení (ze souboru), BufReader obaluje Reader a přidává buffer.
+##### Aplikovatelnost
+- chceme za běhu měnit chování objektu
+- dynamicky přidáváme nějaké další funkcionality k objektu
 
-![](img/20230604142455.png)
+Je více flexibilnější než dědičnost, ale při hodně objektech to může být docela chaos.
+
+![600](img/20230604142455.png)
+
 
 #### Proxy
+Prostředník mezi objektem a volajícím, transparentně předává zprávu (a může provádět další operace, hlídat přístup k objektu, provést alokaci objektu on-demand...)
 
-Prostředník mezi objektem a volajícím, transparentně předává zprávu (a může provádět další operace, hlídat přístup k objektu, provést alokaci objektu on-demand...).
+##### Aplikovatelnost
+- pokud potřebuje kontrolovat, případně trackovat volání akcí
+- pokud leží daný objekt na jiné síti a já zprostředkovávám volání
 
 ![](img/20230605125209.png)
 
-#### Facade
 
+#### Facade
 Poskytuje jednotné (a jednoduché) rozhraní složitějšímu subsystému.
 
-![](img/20230605125311.png)
+##### Aplikovatelnost
+- chceme jednoduché rozhraní pro nějaký komplexní systém
+- chceme jednodušší vazby mezi klientem a subsystémy
+
+![600](img/20230605125311.png)
+
 
 #### Flyweight
+Sdílený objekt použitý na vícero místech - sdílený stav je uchováván v objektu, kontextuální stav se dodá skrz parametry volané metody. Slouží k úspoře paměti a/nebo výpočtu (pokud je inicializace drahá). Rozlišujeme mezi sdíleným a specifickým stavem. Tedy pro textový editor mám pro všechny znaky A uloženou jednu nějakou vizualizaci, což je tedy sdílený stav. Na druhou stranu pozice daného znaku je již specifická a nemůže být sdílena, jde tedy o specifickou vlastnost.
 
-Sdílený objekt použitý na vícero místech - sdílený stav je uchováván v objektu, kontextuální stav se dodá skrz parametry volané metody. Slouží k úspoře paměti a/nebo výpočtu (pokud je inicializace drahá).
+##### Aplikovatelnost
+- používáme velké množství malých objektů
+- cena za uložení je vysoká
 
-E.g. DB pool
+Příkladem je DB pool, případně nějaký textový editor. Šetříme paměť, více vytěžujeme výpočetní výkon při hledání.
 
 ![](img/20230605130130.png)
 
+
 ### Behavioral patterns
 
-Řeší chování objektů a dynamické interakce mezi objekty.
-
 #### Iterator
-
 Poskytuje jednotné rozhraní k průchodu prvky kolekcí. Je to samostatný objekt (specifický pro danou strukturu), má metody jako `current()` a `next()` umožňující přístup k prvku, nebo posunutí interního ukazatele iterátoru na další prvek.
 
-E.g. implementace `for-in/foreach`.
+##### Aplikovatelnost
+- nechceme zobrazovat interní strukturu
+- chceme paralelní procházení, díky více instancím
+- implementace `for-in/foreach`.
 
-![](img/20230603144800.png)
+![600](img/20230603144800.png)
+
 
 #### Strategy
+Poskytuje rozhraní k výpočtu/operaci, které může klient použít bez znalosti konkrétní implementace a jejích detailů. Díky tomu je možné konkrétní implementace pro výpočet snadno měnit, nebo jednotně používat funkcionalitu objektů s rozdílnými implementacemi. Klient přistupuje přes `Context`, který se stará o případnou volbu strategie. Konkrétní strategie lze měnit za běhu. Díky tomuto přístupu například eliminujeme switch case. 
 
-Poskytuje rozhraní k výpočtu/operaci, které může klient použít bez znalosti konkrétní implementace a jejích detailů. Díky tomu je možné konkrétní implementace pro výpočet snadno měnit, nebo jednotně používat funkcionalitu objektů s rozdílnými implementacemi. Klient přistupuje přes `Context`, který se stará o případnou volbu strategie. Konkrétní strategie lze měnit za běhu. *?Iterátor by se dal považovat za formu strategy?*
+##### Aplikovatelnost
+- máme nějaké třídy, které se liší pouze v implementaci jedné metody
+- máme různé varianty a přístupy k výpočtu algoritmu
+- libovolné použití přístupu přes rozhraní, třeba výpočet trasy (pro auto, pro cyklistu)
 
-E.g. libovolné použití přístupu přes rozhraní, třeba výpočet trasy (pro auto, pro cyklistu, pro chodce..)
-
-![](img/20230603153352.png)
+![600](img/20230603153352.png)
 
 #### State
-
 Obdobný jako Strategy, výběr implementace děláme na základě aktuálního stavu, který je možné měnit za běhu. O konkrétní stav (a výběr implementace) a jeho přeměny se stará `Context`, díky čemu izolujeme a můžeme jednoduše kontrolovat přechodu stavu v systému. 
+
+##### Aplikovatelnost
+- pokud se za běhu mění stavy objektu a jemu se na základě toho mění logika
+- příkladem je telefon a jeho tlačítka pokud je vypnutý, zapnutý nebo zamčený
 
 Na rozdíl od `Strategy`
 - daná implementace je vybrána na základě vnitřního stavu
-- řešíme přechody stavu, stavy se můžou nahradit jiným stavem (=> stavy mohou mít referenci na kontext)
-- neřešíme jeden specifický task, ale poskytujeme implementaci pro většinu věcí co `Context` nabízí
+- řešíme přechody stavu, stavy se můžou nahradit jiným stavem
+- stavy mohou mít referenci na kontext
+- ne jenom specifický úkol, ale poskytujeme implementaci pro většinu věcí co `Context` nabízí
 
-E.g. Vypínač má dva stavy (concrete state), Vypnutý Vypínač a ZapnutýVypínač. Interface Vypínač má metodu přepni(), čímž se změní stav (VypnutýVypínač na ZapnutýVypínač a opačně)
+Příklad vypínač má dva stavy (concrete state), Vypnutý Vypínač a ZapnutýVypínač. Interface Vypínač má metodu přepni(), čímž se změní stav (VypnutýVypínač na ZapnutýVypínač a opačně)
 
-![](img/20230603154910.png)
+![600](img/20230603154910.png)
+
 
 #### Memento
-
 Uchovává předchozí stavy objektu, díky čemuž je možné přenést objekt do dřívějšího stavu. Používá se pro případy, kdy přímý přístup do atributů třídy není možný (private atributy).
 
-E.g. použití při implementaci UNDO.
+##### Aplikovatelnost
+- chceme si ukládat předchozí stavy objektu
+- nechceme aby se ven dostávaly implementační detaily
 
-![](img/20230605132549.png)
+Příklad: použití při implementaci UNDO.
+
+![600](img/20230605132549.png)
+
 
 #### Observer
-
 Umožňuje tvorbu mechanismu pro notifikace. Observery se registrují ke sledování Subjektu (ukládáme si reference observerů do vektoru). V momentě, kdy se subjekt změní (a měly by být observery notifikovány), stačí zavolat metodu notify, která projde observery a každého notifikuje (obvykle zavoláním metody).
 
-Používá se pro nahrazení pollingu (opakovaně se ptám "už se událost stala?").
+##### Aplikovatelnost
+- pokud máme nějaké dvě třídy, které na sobě závisí
+- chceme efektivnější metodu než pooling
 
-![](img/20230605162806.png)
+![600](img/20230605162806.png)
+
 
 #### Visitor
-
 Poskytuje jednotné rozhraní pro spuštění nějaké shodné akce nad objekty. Každý objekt má implementaci odlišnou, ale signatura pro všechny objekty je shodná (e.g. serializace různých struktur, bere Self, vrací String). Namísto abychom na základě typu struktury volali příslušnou metodu (`if let Vehicle::Car(_) = my_data { return serialize_car(my_data); }`), implementujeme metodu poskytnutou rozhraním (jen `serialize(&self)`). V diagramu je to metoda `accept(v: Visitor)`.
+
+##### Aplikovatelnost
+- pokud máme více různých tříd nad kterými musíme vykonat nějakou operaci
+- nevýhodou je, že porušuje zapouzdření
+- pokud nad různými třídami máme různé operace, které je potřebna provést
 
 E.g. serde
 
-![](img/20230605165644.png)
-
-## Rozhraní komponent, kontrakty na úrovni rozhraní, OCL
-
-Aby mohl komponent komunikovat se svým okolím (být volán a případně vracet data), potřebuje nějaké veřejné rozhraní, kterému se říká **signatura**. Skládá se z poskytovaných operací (funkcí/metod) a jejich vstupních a výstupních parametrů.
-
-U rozhraní nás zajímají i další omezení, které mohou upravovat (správné) používání rozhraní (*e.g. uživatel se může registrovat jen jednou*). Signatuře a omezení se souhrnně říká **kontrakt**. Kontrakt popisuje poskytnutou funkcionalitu za předpokladu, že dodržíme předem stanovené podmínky. 
-
-Součástí kontraktu (v kontextu struktur/objektů) můžou být:
-- **preconditions** - co musí platit před vyvoláním dané metody, aby metoda proběhla správně (e.g. máme dost peněz na účtu)
-- **postconditions** - co musí platit po skončení dané metody, i.e., co metoda poskytuje (e.g. proběhne platba, z účtu se nám odečte příslušná platba)
-- **invariants** - co vždy musí platit, váže se obvykle k objektům, nejen metodám (e.g. na debetním účtu není možné jít do mínusu)
-
-**OCL (Object Constraint Language)** je deklarativní jazyk, který umožňuje popis kontraktů a jejich constraintů (omezení domén hodnot), včetně jejich zavedení do UML, a může být použit i pro jejich vynucování (e.g. generování kódu na základě kontraktu popsaného v komentáři/anotacích (v Javě `@`)).
-
-Při definici kontraktů objektů s dědičností nesmíme porušit Liskov substitution principle, dědic může invarianty a postconditions pouze utahovat, ne je rozvolňovat (co platilo pro rodiče, musí platit i pro potomka). Naopak je to u preconditions, kde může dědic podporovat více vstupů než předek.
-
-Příklady:
-
-Auto (třída Car) nesmí překročit rychlost 240.
-`context Car inv: speed < 240`
-^ speed a self.speed (kde self je Car) jsou identické
-
-Před odebráním prvku musí zásobník něco obsahovat, vrací to co bylo na vrchu zásobníku
-```
-context Stack::pop()
-pre neniPrazdny: self.len() > 0
-post vraciVrsekZasobniku: result = self@pre.top()
-```
-
-Po vložení prvku se zvětší zásobník
-```
-context Stact::push(element)
-post: self.len() = self@pre.len() + 1
-```
-
-V OCL lze používat funkcionální přístup ke kolekcím (select, forAll...), řešit existenci (exists), provádět množinové operace (union, intersection...), používat booleovské operátory (or, and, implies...) a spoustu dalšího (proměnné, cykly...).
+![600](img/20230605165644.png)
 
 ## Modely softwarových systémů, jazyk UML.
 
-Modely sw systémů popisují systém vždy z nějakého zjednodušeného pohledu (model je už z definice abstrakce). Různé modely se zabývají různými aspekty/fázemi vývoje systému. Důležité však je, aby byly modely systému vzájemně konzistentní. Obecně lze rozlišovat na modely popisující strukturu a modely popisující chování.
+Modely softwarových systémů popisují systém vždy z nějakého zjednodušeného pohledu (model je už z definice abstrakce). Různé modely se zabývají různými aspekty/fázemi vývoje systému. Důležité však je, aby byly modely systému vzájemně konzistentní. Obecně lze rozlišovat na modely popisující strukturu a modely popisující chování.
 
-**UML** je modelovací jazyk umožňující jednotný způsob vizualizace návrhu systému. Pro snadné verzování je fajn PlantUML (píšeme UML jako deklarativní kód, ze kterého generujeme příslušné diagramy).
-
-Příklad interface
-
-![](img/20230605172409.png)
+**UML (Unified Modeling Language)** je standardizovaný modelovací jazyk umožňující jednotný způsob vizualizace návrhu systému. Pro snadné verzování je fajn PlantUML (píšeme UML jako deklarativní kód, ze kterého generujeme příslušné diagramy). UML se dělí na základní typy a to je strukturální a behaviorální.
 
 ### Context diagram
 
@@ -293,7 +523,7 @@ Neřešíme části, se kterými přímo neinteragujeme. Ty jsou vidět v [Ecosy
 
 ### Use case diagram
 
-Zahrnuje všechny (uživatelé i jiné systémy), kteří budou systém používat ve formě actorů. U každého actora vidíme dostupné akce (use case) a případně vazby mezi akcemi (<--extend, include-->, spuštění další akce).
+Zahrnuje všechny (uživatelé i jiné systémy), kteří budou systém používat ve formě actorů. U každého actora vidíme dostupné akce (use case) a případně vazby mezi akcemi.
 
 | ![](img/20230607130528.png) | ![](img/20230607130605.png) |
 |---|---|
@@ -307,12 +537,10 @@ Diagram tříd, ale neřešíme datové typy ani metody. Zajímají nás klíčo
 Statická reprezentace systému ve formě tříd, zobrazuje jejich metody, atributy a vzájemnou provázanost. Vztahy mají kardinalitu
 
 **Asociace** - klasická šipka (nebo čára pro oboustranný vztah), popisuje vztah daných tříd
-**Agregace** - bílý kosočtverec, popisuje, že třída obsahuje jinou třídu (u ní je kosočtverec)
-**Kompozice** - černý kosočtverec, popisuje, že třída (s kosočtvercem) je nedílnou součástí jiné třídy
+**Agregace** - bílý kosočtverec, třída obsahuje jinou třídu (u ní je kosočtverec)
+**Kompozice** - černý kosočtverec, třída (s kosočtvercem) je nedílnou součástí jiné třídy
 
 ![](img/20230608120634.png)
-
-![](img/20230608120112.png)
 
 ### Object diagram
 
@@ -354,16 +582,7 @@ Komunikační rozhraní koponentů se nazývají porty, přímé spoje connector
 
 **Verifikace vs validace** - validace ověřuje, že náš model odpovídá požadavkům, verifikace ověřuje, že naše implementace odpovídá našemu modelu, že je implementace kvalitní. E.g. u mostu by se validovalo, že je postavený v místě, kde je potřeba. Verifikovalo by se, že je postavený správně.
 
-**Motivace objektových metod/návrhových vzorů**
-- Systémy bývají složité, špatně se udržují a je náročné měřit/zajistit kvalitu, často se mění nároky
-=> pomůže dekompozice systému do menších koherentních částí, které se lépe udržují/mění, snadněji se měří kvalita
-
-Dekompozice podle [SOLID](./2_kvalita_kodu.md#solid-principy)
-- single responsibility - každý modul/třída/funkce by se měly soustředit pouze na jednu část funkcionality (a tu zapouzdřovat)
-- open/closed - každý modul/třída/(funkce) by měly být rozšiřitelné i.e. přidání změn způsobí minimální modifikaci kódu, většinou rozšiřujeme pomocí nových tříd/metod
-- liskov substitution - každý (dědičně) nadřazený objekt by měl být nahraditelný podřazeným objektem, aniž by byl narušen původní kontrakt. E.g. nemůžeme vyhodit výjimku, když to nadřazený nikdy nedělal. Nemužeme brát u stejné metody konkrétnější argument, než jaký bere nadřazený objekt (je v pohodě brát abstraktnější). Nemůžeme vracet abstraktnější typ, než jaký vrací nadřazený. Je v pohodě přidávat funkcionalitu ve formě dalších metod.
-- interface segregation - rozbíjíme velká rozhraní na menší, logicky související jednotky. Jen to, co klient opravdu může potřebovat.
-- dependency inversion - závisíme na abstrakcích (rozhraní), ne na konkrétních implementacích
+**Motivace objektových metod/návrhových vzorů** - systémy bývají složité, špatně se udržují a je náročné měřit/zajistit kvalitu, často se mění nároky. Pomůže dekompozice systému do menších koherentních částí, které se lépe udržují/mění, snadněji se měří kvalita
 
 **Problém s cyklickou vazbou objektů** - e.g. v metodě toString() je potřeba vhodně řešit, abychom se necyklili. Proto může být vhodnější definovat si pro takové případy speciální objekty s jasnou hierarchií a bez cyklů
 
